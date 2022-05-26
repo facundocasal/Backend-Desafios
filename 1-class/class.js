@@ -6,7 +6,7 @@ class Usuario {
         this.mascotas = []
     }
     getFullName (){
-        return `el nombre del usuario es ${this.nombre} ${this.apellido}`
+        return `${this.nombre} ${this.apellido}`
     }
     addMascotas(masc){
         this.mascotas.push(masc)
