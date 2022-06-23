@@ -7,8 +7,9 @@ const rutas = require(`./routes/route`)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// app.set(`views`, path.join(__dirname, `./views`))
-// app.set(`view engine`, `pug`)
+app.set('views', path.join(__dirname, './views'))
+app.set('view engine', 'ejs')
+
 app.set(express.static(path.join(__dirname, "public")))
 
 app.use(`/`, rutas)

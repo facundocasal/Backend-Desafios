@@ -5,18 +5,18 @@ const product = []
 let productExist = false
 
 router.get(`/`, (req,res)=>{
-    // let home = "inicio"
-    // res.render("index" , {home})
+    let page = "inicio"
+    res.render("index" , {page})
 })
 
 router.get(`/formulario`, (req,res)=>{
-    // let formulario = "Formulario"
-    // res.render(`form`, {formulario})
+    let page = "Formulario"
+    res.render(`form`, {page})
 })
 
 router.get(`/productos`, (req , res)=>{
-    // let namePage = "productos"
-    // res.render("listProduct",{namePage, product , productExist})
+    let page = "productos"
+    res.render("listProduct",{page, product , productExist})
 })
 
 
@@ -29,7 +29,8 @@ router.post(`/productos`, (req , res)=>{
     }
     productExist = true
     product.push(newProduct)
-    res.render("succes")
+    let page = "succes"
+    res.render("succes",{page})
 })
 
 module.exports = router
