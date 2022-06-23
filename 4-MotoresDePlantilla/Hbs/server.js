@@ -1,6 +1,6 @@
 const express = require(`express`)
 const app = express()
-const rutas = require(`./route/route`)
+const rutas = require(`./routes/route`)
 const handlebars = require(`express-handlebars`).engine
 
 app.use(express.json())
