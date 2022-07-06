@@ -30,7 +30,8 @@ io.on('connection', async socket => {
     io.emit("producto:server", listaProductos)
 
     socket.on("producto:cliente", async productInfo => {
-        await productosList.save(productInfo) 
+        await productosList.save(productInfo)
+         
         listaProductos = await productosList.getAll();
         io.emit("producto:server", listaProductos)         
     })

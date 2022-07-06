@@ -23,7 +23,11 @@ function sendProduct (e) {
         price : Number(priceProduct.value),
         img : imgProduct.value,
     }
-    socket.emit("producto:cliente", product)      
+    socket.emit("producto:cliente", product)    
+
+    nombreProduct.value = " "
+    priceProduct.value = " "
+    imgProduct.value = " "
 }
 
 function sendMsj (e) {
@@ -34,9 +38,11 @@ function sendMsj (e) {
             tiempo : new Date().toLocaleString(),
         }
         socket.emit("mensaje:cliente", msj)
+        userEmail.value = " "
+        userMensaje.value = " "
 }
 
-async function renderProducts(products) { 
+async function renderProducts(products) {
     const response = await fetch('./tabla.ejs')
     .then(res => res.text()).then(plantilla => {
         products.map(e => {
@@ -64,5 +70,6 @@ socket.on('server:mensajes', infoMensaje =>{
 socket.on("producto:server", products => {
     renderProducts(products)
 })
+
 enviarMensaje.addEventListener("submit",sendMsj)
 cargarProducto.addEventListener("submit",sendProduct)
