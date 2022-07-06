@@ -3,21 +3,11 @@ const fs = require("fs")
 class Contenedor {
     constructor(fileName) {
         this.fileName = fileName
-        async function createFile() {
-            try {
-                await fs.promises.writeFile(`${fileName}`, "")
-                console.log("archivo Creado ")
-            } catch (err) {
-                console.log(`hubo un error : ${err}`)
-            }
-        }
-        createFile()
     }
     //guardar el objeto en el archivo y devolver el id asignado 
     async save(obj) {
         try {
             let inventary = await fs.promises.readFile(`${this.fileName}`, 'utf-8')
-            console.log(inventary)
             if (!inventary) {
                 obj.id = 1
                 const arrObjs = [obj]

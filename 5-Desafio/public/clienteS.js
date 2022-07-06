@@ -37,10 +37,9 @@ function sendMsj (e) {
 }
 
 async function renderProducts(products) { 
-    console.log(products)
     const response = await fetch('./tabla.ejs')
     .then(res => res.text()).then(plantilla => {
-        products.forEach(e => {
+        products.map(e => {
             const html = ejs.render(plantilla, e)
             listaProductos.innerHTML += html
         });
