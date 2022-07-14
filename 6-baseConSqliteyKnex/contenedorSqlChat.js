@@ -1,7 +1,8 @@
 class ContenedorChat {
-    constructor(database, nameTable) {
+    constructor(database, nameTable, createTable ) {
         this.database = database
         this.nameTable = nameTable
+        this.createTable = createTable
     }
     async save(obj) {
         try {
@@ -18,9 +19,8 @@ class ContenedorChat {
             console.log(data)
             return data
         } catch (err) {
-            if (err) {
-                const createTable = require("./tables/chatTable.js")
-                await createTable()
+            if (err.errno === 1) {
+                await this.createTable()
             } else{
              console.log(`hubo un error al recuperar la base ${this.nameTable} : ${err}`)}
         }
