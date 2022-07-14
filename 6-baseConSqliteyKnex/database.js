@@ -7,7 +7,7 @@ const config = {
       host: '127.0.0.1',
       user: 'root',
       password: '',
-      database: 'ecomerse'
+      database: 'ecommerse'
     },
     pool: { min: 0, max: 7 }
 }
@@ -16,7 +16,7 @@ const config = {
 const configSql3 = {
     client: 'sqlite3',
     connection: {
-        fileName : path.join(__dirname, "./DB/ecommerce.sqlite")
+        fileName : path.join(__dirname, "/DB/ecommerce.sqlite")
     },
     useNullAsDefault : true
 }

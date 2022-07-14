@@ -8,7 +8,7 @@ const listaProductos = document.getElementById("listaProductos")
 const cargarProducto = document.getElementById("cargarProducto")
 
 
-// variables del chat
+// // variables del chat
 
 const userEmail  = document.getElementById("userEmail")
 const userMensaje = document.getElementById("userMensaje")
@@ -16,11 +16,11 @@ const enviarMensaje = document.getElementById("enviarMensaje")
 const chat = document.getElementById("chat")
 
 
-function sendProduct (e) {
+function sendProduct  (e)  {
     e.preventDefault()
     let product = {
         name : nombreProduct.value,
-        price : Number(priceProduct.value),
+        price : priceProduct.value,
         img : imgProduct.value,
     }
     socket.emit("producto:cliente", product)    

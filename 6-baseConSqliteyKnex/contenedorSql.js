@@ -6,7 +6,8 @@ class ContenedorProduct {
     }
     async save(obj) {
         try {
-            await this.config(`${this.nameTable}`).insert(obj)
+            await this.config(this.nameTable).insert(obj)
+            console.log("producto Cargado")
         } catch (err) {
             console.log(`no se pudeo agregar el objeto por : ${err}`)
         }
@@ -18,8 +19,8 @@ class ContenedorProduct {
             const data = await this.config.from(`${this.nameTable}`).select("*")
             return data
         } catch (err) {
-            if (err.code == "ER_BAD_DB_ERROR") {
-                this.createTable()
+            if (err.code == "ER_NO_SUCH_TABLE") {
+                await this.createTable()
             } else{
              console.log(`hubo un error al recuperar la base ${this.nameTable} : ${err}`)}
         }
