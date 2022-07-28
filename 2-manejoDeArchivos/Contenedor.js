@@ -103,9 +103,13 @@ const puerto = 8080
 app.get(`/`, (req , res)=>{
     res.send("hola soy home")
 })
+
+
 app.get(`/productos`, (req , res)=>{
     newFile.getAll().then(i=> res.json(i))
 })
+
+
 app.get(`/productosRandom`, (req , res)=>{
     let numAleatorio = (Math.floor(Math.random() * (4 - 0)))
     newFile.getbyId(numAleatorio)

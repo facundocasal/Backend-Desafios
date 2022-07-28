@@ -35,5 +35,5 @@ io.on('connection', async socket => {
         listaProductos = await productosList.getAll();
         io.emit("producto:server", listaProductos)         
     })
-} )
+})
 

@@ -13,7 +13,7 @@ const createChatTable = require("./tables/chatTable")
 app.use(express.static( path.join(__dirname , './public')))
 
 const productosList = new ContenedorProduct(dataProduct, "productos", createTableProduct);
-const messageLog = new ContenedorChat( dataMsg , "msgs",createChatTable);
+const messageLog = new ContenedorChat(dataMsg, "msgs", createChatTable);
 
 
 io.on('connection', async socket => {

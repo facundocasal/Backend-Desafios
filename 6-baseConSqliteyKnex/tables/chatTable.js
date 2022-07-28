@@ -1,4 +1,4 @@
-const dataMsg = require("../database.js").dataMsg
+const { dataMsg } = require("../database.js")
 
 
 const createChatTable = async () => {
@@ -10,7 +10,6 @@ const createChatTable = async () => {
             chatTable.string("tiempo", 200).notNullable();
         })
         console.log("tabla creada")
-        dataMsg.destroy()
         
     } catch(err){
         console.log("error al crear la tabla de chats: ", err);
