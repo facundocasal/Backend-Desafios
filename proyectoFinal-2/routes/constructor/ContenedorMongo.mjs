@@ -43,7 +43,7 @@ class ContenedorMongoose {
 
     async putById(id, newProduct) {
         try {
-            await this.coleccion.updateOne({id}, {$set: {newProduct}}) 
+            await this.coleccion.findByIdAndUpdate(id, {$set: {newProduct}}) 
 
             return ({resultado: "producto modificado"})
         } catch {
@@ -54,7 +54,7 @@ class ContenedorMongoose {
 
     async deleteById(id) {
         try {
-            await this.coleccion.deleteOne({id})
+            await this.coleccion.findByIdAndDelete(id)
             return { mensaje: "producto borrado" }
         } catch (err) {
             console.log(`hubo un error en recuperar el objeto por id : ${err}`)
@@ -73,9 +73,9 @@ class ContenedorMongoose {
 
     async deleteProduct(id, id_prod) {
         try {
-            const objFind = await this.coleccion.findById(id , {__v : 0})
+            const objFind = await this.coleccion.findById({id } , {__v : 0})
             objFind.product = objFind.product.filter(e => e.id != id_prod)
-            await this.coleccion.updateOne({id}, {$set: {product: objFind.product}}) 
+            await this.coleccion.findByIdAndUpdate(id, {$set: {product: objFind.product}}) 
             return { msj: "producto borrado " }
         } catch (err) {
             console.log(`hubo un error : ${err}`)
@@ -85,12 +85,9 @@ class ContenedorMongoose {
 
     async postProductById(id, product) {
         try {
-            const data = await fs.promises.readFile(`${this.fileName}`, "utf-8")
-            let dataParse = JSON.parse(data)
-            let cartFind = dataParse.find(item => item.id == id)
+            let cartFind =  await this.coleccion.findById({id } , {__v : 0})
             cartFind.product.push(product)
-            dataParse = [...dataParse, cartFind]
-            await fs.promises.writeFile(`${this.fileName}`, JSON.stringify(dataParse))
+            await this.coleccion.findByIdAndUpdate(id, {$set: {product: cartFind.product}}) 
             return { msj: `producto agregado al carrito con id ${id}` }
         } catch (err) {
             console.log(`hubo un error : ${err}`)
