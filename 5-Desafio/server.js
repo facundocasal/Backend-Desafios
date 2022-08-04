@@ -1,38 +1,52 @@
-const express = require("express")
+import express from "express"
+import normalizeMensajes from "./normalizer/normalizer"
+import 'dotenv/config'
+import path from "path"
+import router from "./test/product"
+import productDao from "./Dao/productosDao"
+import menssageDao from "./Dao/MenssageDaosFirebase"
 const { Server: IOServer } = require("socket.io")
 const app = express()
-const path = require("path")
+
+
+
+
 const serverExpress = app.listen(8080, () => console.log('Servidor escuchando puerto 8080'))
+
 const io = new IOServer(serverExpress)
-const  { Contenedor }  = require("./contenedor.js")
+
 
 app.use(express.static( path.join(__dirname , './public')))
 
-const productosList = new Contenedor('./productos.txt');
-const messageLog = new Contenedor('./messageLog.txt');
+app.use("/api/productos", router)
+
 
 
 io.on('connection', async socket => {
     console.log(`se conecto el cliente id : ${socket.id}`)
 
-    let mensajes = await messageLog.getAll()
+    let mensajes = await menssageDao.getAll()
 
-    io.emit("server:mensajes", mensajes)
+    const normalizeMsj = normalizeMensajes(mensajes)
+
+    // io.emit("server:mensajes", mensajes)
+
+
+    socket.emit("server:itemsProduct-Msj", { productos: [], mensajes: normalizeMsj })
 
     socket.on("mensaje:cliente", async messageInfo => {
-        await messageLog.save(messageInfo)
-        mensajes = await  messageLog.getAll()
+        await menssageDao.save(messageInfo)
+        mensajes = await  menssageDao.getAll()
         io.emit('server:mensajes',  mensajes)        
     })
 
-    let listaProductos = await productosList.getAll();
+    let listaProductos = await productDao.getAll();
 
-    io.emit("producto:server", listaProductos)
+    // io.emit("producto:server", listaProductos)
 
     socket.on("producto:cliente", async productInfo => {
-        await productosList.save(productInfo)
-         
-        listaProductos = await productosList.getAll();
+        await productDao.save(productInfo)
+        listaProductos = await productDao.getAll();
         io.emit("producto:server", listaProductos)         
     })
 })

@@ -1,37 +1,39 @@
-const fs = require("fs")
+import admin from "firebase-admin";
+import config from "./config";
 
-class Contenedor {
-    constructor(fileName) {
-        this.fileName = fileName
+admin.initializeApp({
+    credential: admin.credential.cert(config.firebase),
+});
+
+class ContenedorFirebase {
+    constructor(colecion) {
+      this.colecion = db.collection(colecion);
     }
-    //guardar el objeto en el archivo y devolver el id asignado 
-    async save(obj) {
-        try {
-            let inventary = await fs.promises.readFile(`${this.fileName}`, 'utf-8')
-            if (!inventary) {
-                obj.id = 1
-                const arrObjs = [obj]
-                await fs.promises.writeFile(`${this.fileName}`, JSON.stringify(arrObjs))  
-            } else {
-                inventary = JSON.parse(inventary);
-                obj.id = inventary[inventary.length - 1].id + 1
-                inventary.push(obj)
-                await fs.promises.writeFile(`${this.fileName}`, JSON.stringify(inventary))
-            }
-        } catch (err) {
-            console.log(`no se pudeo agregar el objeto por : ${err}`)
-        }
-    }
+    // LECTURA 
     async getAll() {
+      try {
+        const data = await this.colecion.get();
+        const dataDocs = data.docs;
+          let respuesta = dataDocs.forEach(item => ({
+              data : item.data(),
+              id : item.id
+          }))
+        return respuesta;
+      } catch (error) {
+        console.log(`error en getAll de ${this.colecion} : ${error}`);
+      }
+    }
+    async save(obj){
         try {
-            const inventary = await fs.promises.readFile(`${this.fileName}`, "utf-8")
-            let inventaryParse = JSON.parse(inventary)
-            return inventaryParse
+            obj.timestamp = new Date().toLocaleString("fr-FR");
+            const newobj = this.colecion.doc()
+            await newobj.create(obj)
+            return ({respuesta : "ok"})
         } catch (err) {
-            console.log(`hubo un error : ${err}`)
-        }
+            console.log(`no se pudeo agregar el objeto por : ${err}`);
+          }
     }
 }
 
-module.exports = { Contenedor: Contenedor }
+export default ContenedorFirebase
 
