@@ -38,7 +38,7 @@ async function render(logStatus) {
     const saludoTime = setTimeout(()=>{
         saludo.innerHTML = ``;
         saludo.style.visibility = "hidden"
-    },500000)
+    },50000)
 
     const logOut = document.getElementById("logOut")
     logOut.addEventListener("click",(e)=>{

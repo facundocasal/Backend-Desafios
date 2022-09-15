@@ -16,24 +16,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item m-2">
-                <a class="nav-link" href="./index.html"> login  </a>
+                <a class="nav-link" href=""> Registrarse  </a>
             </li>
         </ul>
-    </div>  
-
-    <h2>Registrar Usuario </h2>
-
-    <form action="/register" method="post" class="d-flex w-75 m-auto flex-column">
-        <div class="input-group input-group-sm  mb-3 ">
-            <span class="input-group-text" id="inputGroup-sizing-sm">nombre</span>
-            <input required name="userName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-        </div>
-        <div class="input-group input-group-sm  mb-3 ">
-            <span class="input-group-text" id="inputGroup-sizing-sm">password</span>
-            <input required name="password" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-        </div>
-        <button type="submit" class="btn btn-primary w-25 m-auto">Registrar</button>
-    </form>
+    </div>
+    <div id="root"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -41,6 +28,7 @@
         crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./ejs.min.js"></script>
+    <script src="./clienteS.js"></script>
 </body>
 
 </html>

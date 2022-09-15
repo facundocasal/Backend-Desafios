@@ -105,13 +105,10 @@ function denormalizeMensajes(objMensajes) {
 }
 
 socket.on("server:itemsProduct-Msj", async items => {
-
     const { mensajesDenormalizados, porcentajeOptimizacion } = denormalizeMensajes(items.mensajes)
     items.mensajes = mensajesDenormalizados
     items.optimization = porcentajeOptimizacion;
     renderMessage(items);
-
-
     const mockData = await fetch("http://localhost:8080/api/productos-test")
     const mockProducts = await mockData.json()
     renderProducts(mockProducts)
