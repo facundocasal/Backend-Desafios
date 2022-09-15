@@ -3,11 +3,11 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const path = require("path")
 const MongoStore = require("connect-mongo")
-
+const app = express()
 
 const mongoStoreOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
-const app = express()
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -27,13 +27,13 @@ app.use(session({
     rolling: true
 }))
 
-function auth(req, res, next) {
-    if (req.session.admin === true) {
-        next();
-    } else {
-        res.status(401).json({ status: 401, code: "no credentials" })
-    }
-}
+// function auth(req, res, next) {
+//     if (req.session.admin === true) {
+//         next();
+//     } else {
+//         res.status(401).json({ status: 401, code: "no credentials" })
+//     }
+// }
 
 app.use(express.static(path.join(__dirname, "./public")))
 
@@ -66,7 +66,7 @@ app.get("/logout", (req, res) => {
 
 // app.use("/api/productos", auth, routes)
 
-app.listen(8000 , (req , res)=>{
+app.listen( process.env.PORT || 8000 , (req , res)=>{
     console.log(`escuchando puerto 8000`)
 })
 
