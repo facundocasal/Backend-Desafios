@@ -6,8 +6,8 @@ import mongoose from "mongoose";
 
 
 await mongoose.connect(
-    "mongodb+srv://facundocasal:facu123@cluster0.66urz1f.mongodb.net/?retryWrites=true&w=majority")
-    
+    process.env.MONGODB)
+
 const app = express()
 
 app.use(express.json())
