@@ -1,0 +1,19 @@
+<%- include("./partials/head.ejs") %>
+<body class="container">
+  <% if(page === "error-login"){ %>
+    <%- include("./partials/header.ejs")   %>
+  <% } %> 
+
+  <h1><%= message %></h1>
+
+  <% if(locals.error){ %>
+    <h2><%= error.status %></h2>
+    <p><%= error.data %></p>
+  <% } %> 
+  <%- include("./partials/scriptBtps.ejs") %>
+  <script>
+    if (`<% page %>` === "error-crear-producto"){
+      setTimeout( () => { window.location.href =  `/product/createProduct`; }, 2000 );
+    }
+  </script>
+</body>

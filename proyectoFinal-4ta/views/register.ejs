@@ -1,0 +1,46 @@
+<%- include("./partials/head.ejs")   %>
+<body class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item m-2">
+                        <a class="nav-link" href="/users/login">iniciar sesion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<h1>Registro</h1>
+
+    <form action="/users/register"  method="post" class="d-flex w-75 m-auto flex-column">
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">email</span>
+            <input required name="email" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">nombre</span>
+            <input required name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Apellido</span>
+            <input required name="lastName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Contraseña</span>
+            <input required name="password" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">avatar</span>
+            <input required name="avatar" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <button type="submit" class="btn btn-primary w-25 m-auto">Registrarse</button>
+    </form>
+    <%- include("./partials/scriptBtps.ejs")   %>
+</body>

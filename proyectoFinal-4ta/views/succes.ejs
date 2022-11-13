@@ -1,0 +1,11 @@
+<%- include("./partials/head.ejs")   %>
+<body class="container">
+    <% if(page === "usuario creado"){ %>
+        <%- include("./partials/header.ejs")   %>
+    <% } %> 
+    <h1><%= message %></h1>
+<script>
+   setTimeout( () => { window.location.href =  `<%= redirect %>`; }, 2000 );
+</script>
+<%- include("./partials/scriptBtps.ejs")   %>
+</body>

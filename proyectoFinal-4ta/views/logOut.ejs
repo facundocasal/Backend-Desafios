@@ -1,0 +1,12 @@
+<%- include("./partials/head.ejs") %>
+<body class="container">
+  <h1><%= message %></h1>
+
+  
+  <script>
+    localStorage.clear();
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+  </script>
+</body>

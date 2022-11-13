@@ -1,0 +1,10 @@
+<%- include("./partials/head.ejs")   %>
+<body class="container">
+    <h1><%= message %></h1>
+    <p>seras redirigido al Home </p>
+<script>
+    setTimeout( () => { window.location.href = "/product"; }, 2000 );
+    localStorage.setItem("accesToken", `<%= accessToken %>`)
+</script>
+<%- include("./partials/scriptBtps.ejs")   %>
+</body>

@@ -1,0 +1,39 @@
+<%- include("./partials/head.ejs")   %>
+<body class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item m-2">
+                        <a class="nav-link" href="/users/panel"> panel </a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link" href="/users/logOut">Cerrar secion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <% products.forEach(e => { %>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="<%= e.image %>" alt="<%= e.image %>">
+            <div class="card-body">
+              <h5 class="card-title">Producto : <%= e.name %></h5>
+              <h4 class="card-title">precio : $<%= e.price %></h4>
+              <p class="card-text">Descripcion: <%= e.description %></p>
+              <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <script>
+        let accessToken = localStorage.getItem("accesToken")
+        console.log(accessToken)
+    </script>
+        <%- include("./partials/scriptBtps.ejs")   %>
+</body>
