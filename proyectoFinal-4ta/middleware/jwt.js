@@ -5,23 +5,19 @@ const token_secret = process.env.TOKEN_SECRET
 
 const jwtValidator = async(req, res, next) => {
   
-  const accessToken = req.headers['accesstoken']
+  const accessToken = req.cookies.token
 
   try {
     const decode = jwt.verify(accessToken, token_secret)
-    req.userId = decode.userId;
-    req.userEmail = decode.email;
-    req.role = decode.role;
     if (decode) {
+      req.user = decode
       return next()
     }
     return res.status(404).json({
       message: "User Not found!"
     })
   } catch (error) {
-    res.status(401).json({
-      message: "debes estar logueado para tener acceso"
-    })
+      res.render("error" , {page : "error-login" , message: "debes estar logueado para tener acceso , puede que tu sesión haya expirado"})
   }
 }
 

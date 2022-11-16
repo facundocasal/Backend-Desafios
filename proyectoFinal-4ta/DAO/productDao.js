@@ -25,7 +25,7 @@ const getAllProduct = async () =>{
 }
 
 const getOneProduct = async (products) => {
-    return await products_model.find({
+    return await Products.find({
       '_id': {$in: products}
     })
   
@@ -36,7 +36,7 @@ const updateProduct = async (req, res) =>{
     const {id} = req.body
     try {
         await Products.findByIdAndUpdate(id, {$set: req.body})
-        return{message : "producto modificado"};
+        return{message : "producto modificado" , status : 200};
     } catch (error) {
         return{message : "error al modificar el producto "};
     }
@@ -46,7 +46,7 @@ const updateProduct = async (req, res) =>{
 const deletProduct = async (id)=>{
     try {
         await Products.findByIdAndDelete(id)
-        return {message : "producto eliminado"}
+        return {message : "producto eliminado" , status : 200}
     } catch (error) {
         return {message : "error al eliminar Producto"}        
     }
@@ -56,5 +56,6 @@ module.exports = {
     createProduct,
     getAllProduct,
     updateProduct,
-    deletProduct
+    deletProduct,
+    getOneProduct
 };

@@ -13,28 +13,42 @@ const renderCreateProduct = async ( req , res )=>{
 const createProduct =  async (req , res) =>{
     const product = await productDao.createProduct(req, res);
     if(product.status === 200){
-        res.render("succes", { page : "producto creado", message: product.message , redirect : "/product/createProduct"})
+        res.render("succes", { page : "actualizacion-productos", message: product.message , redirect : "/product/createProduct"})
     }else {
-        res.render("error", { page : "error-crear-producto", message: product.message})
+        res.render("error", { page : "error-producto", message: product.message})
     }
 };
+
+
+const updateProductPanel = async (req, res) => {
+
+    const products = await productDao.getAllProduct()
+
+    res.render('updateProduct', {data: products})
+
+
+}
+
+
 
 const updateProduct = async ( req , res )=>{
     const productupdate =  await productDao.updateProduct(req, res)
     if(!productupdate){
-        res.json(productupdate.message)
+        res.render("succes", { page : "actualizacion-productos", message: productupdate.message , redirect : "/users/panel"})
     }else{
-        res.json(productupdate.message)
+        res.render("error", { page : "error-producto", message: productupdate .message})
     }
 }
+
+
 
 const deleteProduct = async ( req , res )=>{
     const {id} = req.body
     const productDelete =  await productDao.deletProduct(id)
     if(!productDelete){
-        res.json(productDelete.message)
+        res.render("succes", { page : "actualizacion-productos", message: productDelete.message , redirect : "/users/panel"})
     }else{
-        res.json(productDelete.message)
+        res.render("error", { page : "error-producto", message: productDelete.message})
     }
 }
 
@@ -42,6 +56,7 @@ const deleteProduct = async ( req , res )=>{
 module.exports = {
     homeProduct,
     renderCreateProduct,
+    updateProductPanel,
     createProduct,
     updateProduct,
     deleteProduct

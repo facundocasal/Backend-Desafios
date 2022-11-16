@@ -34,7 +34,9 @@ const logOut = async (req, res) =>{
 }
 
 const panel = async (req , res) =>{
-    res.render("userInfo", {page : "Panel Usuario" , message : "Panel Usuario"})
+    const role = req.user.role
+    const user = await userDao.getUser(req.user.userEmail)
+    res.render("userInfo", {page : "Panel Usuario" , message : "Panel Usuario" , role, user: user ,  port : process.env.PORTSOCKET})
 } 
 
 

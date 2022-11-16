@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const {homeProduct , renderCreateProduct,  createProduct , updateProduct , deleteProduct} = require("../controllers/product.controllers")
-
 const controllersProduct = require('../controllers/product.controllers')
+const { isAdmin} = require('../middleware/isAdmin');
+const { jwtValidator } = require('../middleware/jwt');
+
 router
-.get("/" , homeProduct)
-.get("/createProduct", controllersProduct.renderCreateProduct)
-.post("/createProduct" , controllersProduct.createProduct )
-.post("/deleteProduct", controllersProduct.deleteProduct  )
-.post("/updateProduct", controllersProduct.updateProduct )
+.get("/", jwtValidator , controllersProduct.homeProduct)
+.get("/createProduct", jwtValidator , isAdmin ,  controllersProduct.renderCreateProduct)
+.get("/updateProduct", jwtValidator , isAdmin , controllersProduct.updateProductPanel )
+.post("/createProduct" , jwtValidator , isAdmin , controllersProduct.createProduct )
+.post("/deleteProduct", jwtValidator , isAdmin , controllersProduct.deleteProduct )
+.post("/updateProduct", jwtValidator , isAdmin , controllersProduct.updateProduct )
 
 module.exports = router;

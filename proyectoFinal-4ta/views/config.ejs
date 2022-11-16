@@ -1,44 +1,14 @@
 <%- include("./partials/head.ejs")   %>
+
 <body class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item m-2">
-                        <a class="nav-link" href="/product"> Tienda </a>
-                    </li>
-                    
-                    <% if(role === "admin"){ %>
-                        <li class="nav-item m-2">
-                            <a class="nav-link" href="/product/createProduct">  cargar Producto </a>
-                        </li>
-                        <li class="nav-item m-2">
-                            <a class="nav-link" href="/product/updateProduct">  modificar Productos </a>
-                        </li>
-                    <% } %> 
-                    <li class="nav-item m-2">
-                        <a class="nav-link" href="/users/logOut">Cerrar secion</a>
-                    </li>
-                    <li class="nav-item m-2">
-                        <a href="http://localhost:<%= port %>/chat.html"><span id="chatButton" class="btn btn-primary">Chatea!</span></a>
-                    </li>    
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <h1><%= message %></h1>
-
+    <%- include("./partials/header.ejs")   %>
+    <h1> <%= title %></h1>
     <div class="container bootstrap snippets bootdey">
         <div class="panel-body inf-content">
             <div class="row">
                 <div class="col-md-4">
                     <!-- <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">  -->
-                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src=<% if(user.avatar){ %> "../images/<%= user.avatar%>"<% }else{ %> "https://bootdey.com/img/Content/avatar/avatar7.png" <% } %> data-original-title="Usuario">
+                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="" data-original-title="Usuario">
                 </div>
                 <div class="col-md-6">
                     <strong>Information</strong><br>
@@ -49,79 +19,112 @@
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                                        Identificacion                                                
+                                        Base De Datos usada                                                
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    <%= user._id %>    
+                                    <%= config.database %>    
                                 </td>
                             </tr>
                             <tr>    
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-user  text-primary"></span>    
-                                        Name                                                
+                                        Usuario Mongo Atlas                                                
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    <%= user.name %>     
+                                    <%= config.mongoUser %>     
                                 </td>
                             </tr>
                             <tr>        
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-cloud text-primary"></span>  
-                                        Lastname                                                
+                                        contraseña Mongo Atlas                                              
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    <%= user.lastName %>  
+                                    <%= config.mongoPass %>  
                                 </td>
                             </tr>     
                             <tr>        
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-eye-open text-primary"></span> 
-                                        Role                                                
+                                        Nombre dataBase                                               
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    <%= user.role %>
+                                    <%= config.dataBaseName %>
                                 </td>
                             </tr>
                             <tr>        
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-envelope text-primary"></span> 
-                                        Email                                                
+                                        Nodemailer Usuario                                              
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    <%= user.email %> 
+                                    <%= config.emailAdmin %> 
                                 </td>
                             </tr>
                             <tr>        
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                        created                                                
+                                        nodemailer contraseña                                                
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    <%= user.createdAt %>
+                                    <%= config.emailPass %>
                                 </td>
                             </tr>
                             <tr>        
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                        Modified                                                
+                                        JWT TOKEN secret                                                 
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    <%= user.updatedAt %>
+                                    <%= config.tokenSecret %>
                                 </td>
-                            </tr>                                    
+                            </tr>
+                            <tr>        
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                        PORT SOCKET                                                 
+                                    </strong>
+                                </td>
+                                <td class="text-primary">
+                                    <%= config.portSocket %>
+                                </td>
+                            </tr>
+                            <tr>        
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                        USER ADMIN                                                  
+                                    </strong>
+                                </td>
+                                <td class="text-primary">
+                                    <%= config.emailUserAdmin %>
+                                </td>
+                            </tr>
+                            <tr>        
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                        PASS USER ADMIN                                                
+                                    </strong>
+                                </td>
+                                <td class="text-primary">
+                                    <%= config.passUserAdmin %>
+                                </td>
+                            </tr>                                     
                         </tbody>
                     </table>
                     </div>
@@ -129,6 +132,7 @@
             </div>
         </div>
         </div> 
-
-    <%- include("./partials/scriptBtps.ejs")   %>
+        <%- include("./partials/scriptBtps.ejs") %>
 </body>
+
+</html>

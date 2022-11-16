@@ -12,6 +12,9 @@
                         <a class="nav-link" href="/users/panel"> panel </a>
                     </li>
                     <li class="nav-item m-2">
+                        <a class="nav-link"  href="/cart" id="irCarrito">Carrito</a>
+                    </li>
+                    <li class="nav-item m-2">
                         <a class="nav-link" href="/users/logOut">Cerrar secion</a>
                     </li>
                 </ul>
@@ -26,14 +29,13 @@
               <h5 class="card-title">Producto : <%= e.name %></h5>
               <h4 class="card-title">precio : $<%= e.price %></h4>
               <p class="card-text">Descripcion: <%= e.description %></p>
-              <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+              <form action="/cart/<%= e.id %>" method="post"><button type="submit">Agregar Al Carrito</button></form>
             </div>
         </div>
         <% }); %>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        let accessToken = localStorage.getItem("accesToken")
-        console.log(accessToken)
     </script>
         <%- include("./partials/scriptBtps.ejs")   %>
 </body>

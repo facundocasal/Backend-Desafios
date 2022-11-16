@@ -2,18 +2,15 @@ require('./database/database')
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const logger = require('morgan');
 const cors = require('cors');
-const routes = require('./routes/index')
+const routes = require('./routes/index');
+const socket = require('./socket.io/chat.socket')
 
 const dotenv = require('dotenv')
 dotenv.config()
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users.routes');
-const productsRouter = require('./routes/product.routes');
-const chatRouter = require('./routes/chat.routes')
 
 const app = express();
 
@@ -53,5 +50,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error' , {page: "error"});
 });
+
+const expressServer = app.listen(process.env.PORTSOCKET, function () {
+  console.log(`Server listeningg port  ${this.address().port}`);
+});
+
+
+socket(expressServer);
 
 module.exports = app;

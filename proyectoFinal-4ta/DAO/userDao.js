@@ -15,14 +15,14 @@ const getAllUser = async (req, res) =>{
 }
 
 const register = async ( req , res) =>{
-    const {email , name , lastName , password , avatar} = req.body
+    const {email , name , lastName , password  } = req.body
     try {
         const newUser = User({
             email,
             name,
             lastName,
             password : await hashPassword(password),
-            avatar,
+            avatar : req.file.originalname,
             role : "client"
         })
         await newUser.save()        
@@ -41,7 +41,6 @@ const login = async (req , res) => {
     }
     try {        
         const match = await isValidPassword(password , user.password)
-        console.log(match)
         const payload = {
             userEmail : user.email,
             role: user.role,
@@ -51,6 +50,9 @@ const login = async (req , res) => {
         }
         const accessToken = jwt.sign(payload, tokenSecret , {expiresIn: "2h"})
         if(match){
+            res.cookie("token", accessToken,{
+                httpOnly: true
+            });
             return { accessToken, message: "inicio de sesión satisfactorio" , status : 200}
         } else{
             return { message : "credenciales incorrectas"}
@@ -60,8 +62,14 @@ const login = async (req , res) => {
     }
 }
 
+const getUser = async (email) =>{
+    const user = await User.findOne({email})
+    return user
+}
+
 module.exports = {
     getAllUser,
     register,
     login,
+    getUser
 }

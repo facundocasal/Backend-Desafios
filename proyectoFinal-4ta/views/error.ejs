@@ -12,7 +12,7 @@
   <% } %> 
   <%- include("./partials/scriptBtps.ejs") %>
   <script>
-    if (`<% page %>` === "error-crear-producto"){
+    if (`<% page %>` === "error-producto"){
       setTimeout( () => { window.location.href =  `/product/createProduct`; }, 2000 );
     }
   </script>

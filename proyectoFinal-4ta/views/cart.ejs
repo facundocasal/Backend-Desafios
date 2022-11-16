@@ -1,4 +1,63 @@
-<%- include("./partials/head.ejs")   %>
+<%- include("./partials/head.ejs") %>
 <body class="container">
-    <%- include("./partials/header.ejs")   %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item m-2">
+                        <a class="nav-link" href="/users/panel"> Panel </a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link"  href="/product">Tienda</a>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link" href="/users/logOut">Cerrar secion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <% if(products != undefined ){ %>
+    
+            
+            <div class="listContainer">
+                    <% products.forEach(p => { %> 
+                    <div class="card">
+                    <h2><%- p.name %> </h2>
+                    <h3><%- p.description %> </h3>
+    
+                    <p>Precio:<%- p.price %> </p>
+                    <img src="<%- p.image %>">
+                    <form action="/cart/<%= cart %>/<%= p._id %>" method="post"><button type="submit">Eliminar</button></form>
+                    </div>
+               <% })  %> 
+               <br>
+               <a href="/product">VOLVER</a>
+            </div>          
+               <form action="/orders/send" method="POST">
+                    
+                    
+                    <% products.forEach(p => { %>
+                    
+                    <input type="text" value="<%-p.name%>"  class="orderDetail"  name="product" id="prueb"> <br>
+                    
+                    
+                    <% })  %> 
+    
+    
+                <button type="submit">Enviar pedido</button>
+                </form>
+              
+               
+                <% }else{ %>
+                <h1>Por favor inicie sesion para ver los productos</h1>
+                <% } %>
+        </main>
+        <%- include("./partials/scriptBtps.ejs") %>
+    
 </body>

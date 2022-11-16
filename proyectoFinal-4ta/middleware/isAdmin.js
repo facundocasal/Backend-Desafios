@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken")
 
 const isAdmin = async (req , res , next) =>{
     try {
-        if(req.role === "admin"){
+        if(req.user.role === "admin"){
             next()
         } else {
-            res.status(401).json({error : "no tiene acceso" })
+            res.render("error" , {page : "error-login" , message: "Ruta protegida"})
         }
     } catch (error) {
         console.log(error)

@@ -11,39 +11,33 @@ const isValidPassword = async (password , hashPassword) =>{
 }
 
 
+
 //// MAILER ////
 
 //config
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: process.env.MAIL,
-    pass: process.env.MAILPASS,
+    user: process.env.ADMINEMAIL,
+    pass: process.env.MAILPASS ,
   },
 });
 
 // Function
 const sendMail = async (mail, subject, body) => {
   const mailOptions = {
-    from: "e-Commerce Fernando Diaz",
+    from: "e-Commerce Backend CoderHouse",
     to: mail,
     subject: subject,
     html: `<span>${body}</span>`,
   };
 
-  const info = await transporter.sendMail(mailOptions);
+  await transporter.sendMail(mailOptions);
 };
 
-// module.export = {
-//   auth,
-//   hashPassword,
-//   isValidPassword,
-//   validatePass,
-//   isAdmin,
-//   isLogged,
-//   sendMail,
-// };
 
 module.exports = {
   hashPassword,

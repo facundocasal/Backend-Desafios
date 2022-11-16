@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="chat">
+        <span id="chat-title">Chat general</span>
+        <form action="" id="formMsj" method="post" class="d-flex w-75 m-auto flex-column">
+            <div class="input-group input-group-sm  mb-3 ">
+                <span class="input-group-text" id="inputGroup-sizing-sm">nombre</span>
+                <input required name="email" type="text" id="email" class="form-control" placeholder="nombre"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm  mb-3 ">
+                <span class="input-group-text" id="inputGroup-sizing-sm">apellido</span>
+                <input required name="email" type="text" id="apellido" class="form-control" placeholder="apellido"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm  mb-3 ">
+                <span class="input-group-text" id="inputGroup-sizing-sm">nick</span>
+                <input required name="email" type="text" id="alias" class="form-control" placeholder="nick"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm  mb-3 ">
+                <span class="input-group-text" id="inputGroup-sizing-sm">email</span>
+                <input required name="email" type="text" id="nombre" class="form-control" placeholder="correo electronico"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm  mb-3 ">
+                <span class="input-group-text" id="inputGroup-sizing-sm">mensaje</span>
+                <input required name="mensaje" id="mensaje" type="text-area" class="form-control" placeholder="Mensaje"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <button type="submit" id="btn-send" class="btn btn-primary w-25 m-auto">enviar mensaje</button>
+        </form> 
+        <div id="chat-pool">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="./javascripts/client.js" ></script>
+    <footer>
+        <a href="http://localhost:8000/users/panel">Volver</a>
+    </footer>
+</body>
+</html>
