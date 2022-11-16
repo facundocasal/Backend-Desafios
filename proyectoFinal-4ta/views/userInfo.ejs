@@ -37,8 +37,7 @@
         <div class="panel-body inf-content">
             <div class="row">
                 <div class="col-md-4">
-                    <!-- <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">  -->
-                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src=<% if(user.avatar){ %> "../images/<%= user.avatar%>"<% }else{ %> "https://bootdey.com/img/Content/avatar/avatar7.png" <% } %> data-original-title="Usuario">
+                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src=<% if(user.avatar.length > 0){ %> "../images/<%= user.avatar%>"<% }else{ %> "https://bootdey.com/img/Content/avatar/avatar7.png" <% } %> data-original-title="Usuario">
                 </div>
                 <div class="col-md-6">
                     <strong>Information</strong><br>
